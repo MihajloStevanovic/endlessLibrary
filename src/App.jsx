@@ -8,8 +8,8 @@ class App extends Component {
 	/*
    *
 	 */
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
 		this.state = {
 			connexion : false,
 			login : undefined,
@@ -20,6 +20,7 @@ class App extends Component {
 		this.getConnexion = this.handleSubmit.bind(this)
 		this.handleLoginChange = this.handleLoginChange.bind(this)
 		this.handlePasswordChange = this.handlePasswordChange.bind(this)
+		console.log(this.props)
 	}
 	/*
    *

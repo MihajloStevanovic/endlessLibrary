@@ -6,6 +6,7 @@ class EslHome extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			connexion : false,
 			films: [
 				{
 					'id':'1',
@@ -47,9 +48,17 @@ class EslHome extends Component {
 
   }
 
-  componentWillUnmount() {
-
-  }
+  /*
+   *
+	 */
+	componentWillMount() {
+		const connected = window.localStorage.getItem('connexion')
+		this.setState({connexion : connected})
+		if(!this.state.connexion) {
+			console.log('pas connecté')
+			this.props.router.push('/home');
+		}
+	}
   render() {
     return (
       <div className="Home">

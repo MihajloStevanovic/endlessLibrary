@@ -9,10 +9,12 @@ import MyMovies from './containers/MyMovies';
 import MySeries from './containers/MySeries';
 import MyProfile from './containers/MyProfile';
 
+const toto = true
+
 const EslRouter = () => {
   return (
     <Router history={browserHistory}>
-      <Route path='/' component={App}/>
+      <Route path='/' component={App} items="toto"/>
       <Route path="/movies" component={EslFilms}/>
       <Route path="/movies/:filmId" component={EslFiche}/>
       <Route path="/series" component={EslSeries}/>
