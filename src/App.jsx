@@ -73,7 +73,10 @@ class App extends Component {
 	loadData(data) {
 		this.setState({loginError : false})
 		this.setState({connexion : true})
-		this.props.router.push('/home');
+		this.props.router.push({
+		     pathname: '/home',
+		     state: {connexion: this.state.connexion}
+		});
 	}
 	/*
    *

@@ -5,6 +5,7 @@ import EslList from '../components/EslList';
 class EslHome extends Component {
 	constructor(props) {
 		super(props)
+		console.log(props)
 		this.state = {
 			connexion : false,
 			films: [
@@ -42,7 +43,6 @@ class EslHome extends Component {
 				}
 			]
 		}
-		console.log(this.props.connexion)
 	}
 	componentDidMount() {
 
@@ -54,9 +54,11 @@ class EslHome extends Component {
 	componentWillMount() {
 		const connected = window.localStorage.getItem('connexion')
 		this.setState({connexion : connected})
-		if(!this.state.connexion) {
+		if(this.state.connexion) {
+
+		} else {
 			console.log('pas connecté')
-			this.props.router.push('/home');
+			//this.props.router.push('/');
 		}
 	}
   render() {
