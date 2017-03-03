@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router'
+import {router} from 'react-router'
 import EslNav from './components/EslNav';
 
 import * as firebase from 'firebase';
@@ -11,7 +11,7 @@ class App extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			connexion : false,
+			loginStatus : window.localStorage.getItem('loginStatus'),
 			login : undefined,
 			password : undefined,
 			loginError: false,
@@ -20,14 +20,17 @@ class App extends Component {
 		this.getConnexion = this.handleSubmit.bind(this)
 		this.handleLoginChange = this.handleLoginChange.bind(this)
 		this.handlePasswordChange = this.handlePasswordChange.bind(this)
-		console.log(this.props)
+		
 	}
 	/*
    *
 	 */
 	componentWillMount() {
-		const connected = window.localStorage.getItem('connexion')
-		this.setState({connexion : connected})
+		if(this.state.loginStatus === 'true') {
+		  this.props.router.push({
+		       pathname: '/home'
+		  });
+		}
 	}
 	/*
    *
@@ -46,12 +49,21 @@ class App extends Component {
 	 */
 	handleSubmit(e) {
 		e.preventDefault()
+		this.displayLoader()
 		const $this = this
 		const login = this.state.login
 		const ref = firebase.database().ref("users/"+login).once('value').then(function(snapshot) {
 		  const response = snapshot.val();
+		  console.log(response)
 		  $this.requestSucces(login,response)
 		});
+	}
+	displayLoader() {
+		console.log('loading')
+		var element = document.createElement('div');
+		element.className+= 'loader-wrapper';
+		var app = document.querySelector('.esl-app');
+		app.appendChild(element);
 	}
 	/*
    *
@@ -60,22 +72,26 @@ class App extends Component {
 		if(this.state.password === response.password) {
 	  	//@todo:get data
 	  	this.setState({userData : response.data})
+	  	window.localStorage.setItem('loginStatus', true);
+	  	this.setState({connected : true})
 	  	this.loadData()
 			//@todo:init app
 	  } else {
 	  	this.setState({loginError : true})
 	  	//@todo: manage error
 	  }
+
+		var element = document.querySelector('.loader-wrapper');
+		element.parentNode.removeChild(element);
 	}
 	/*
    *
 	 */
 	loadData(data) {
 		this.setState({loginError : false})
-		this.setState({connexion : true})
 		this.props.router.push({
 		     pathname: '/home',
-		     state: {connexion: this.state.connexion}
+		     state: {connected: this.state.connected}
 		});
 	}
 	/*

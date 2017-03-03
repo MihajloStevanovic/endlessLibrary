@@ -8,24 +8,65 @@ class EslFilms extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			films: null
+			loginStatus : window.localStorage.getItem('loginStatus'),
+			films: [
+				{
+					'id':'1',
+					'name': 'avatar  ezvgezvez',
+					'type': "film"
+				},
+				{
+					'id':'2',
+					'name':'star wars ezfezf',
+					'type': "film"
+				},
+				{
+					'id':'3',
+					'name':'le hobbit ezfezf',
+					'type': "film"
+				}
+			],
+			series: [
+				{
+					'id':'1',
+					'name':"game of thrones ezfezf",
+					'type': "serie"
+				},
+				{
+					'id':'2',
+					'name':'vikings zfezgfz',
+					'type': "serie"
+				},
+				{
+					'id':'3',
+					'name':'flash ezfezf',
+					'type': "serie"
+				}
+			]
 		}
-		this.onLoadData = this.onLoadData.bind(this)
 	}
-	onLoadData() {
+	componentWillMount() {
+		if(this.state.loginStatus !== 'true') {
+		  this.props.router.push({
+		       pathname: '/login'
+		  });
+		}
+				const $this = this
 		const ref = firebase.database().ref("films/").once('value').then(function(snapshot) {
-		  const films = this.state.films
-		  const datas = snapshot.val();
-		  //this.setState({films:datas})
-		  console.log(datas);
-		  console.log(this.state);
+		  const response = snapshot.val();
+		  //console.log(response)
+		  $this.setState({films:response})
+		  console.log($this.state.films)
 		});
+	}
+	componentDidMount() {
+
 	}
   render() {
     return (
       <div className="Films">
       	<EslNav />
-      	{this.onLoadData()}
+      	on est sur les films
         <h2>Les films les plus regardés</h2>
         <EslList data={this.state.films}/>
         <h2>Les films les plus aimés</h2>
