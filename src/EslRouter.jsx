@@ -10,7 +10,7 @@ import MySeries from './containers/MySeries';
 import MyProfile from './containers/MyProfile';
 
 const loginStatus = window.localStorage.getItem('loginStatus')
-window.localStorage.setItem('loginStatus', false);
+//window.localStorage.setItem('loginStatus', false);
 
 const EslRouter = () => {
   return (

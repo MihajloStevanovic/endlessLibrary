@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {router} from 'react-router'
 import EslNav from './components/EslNav';
 
 import * as firebase from 'firebase';
@@ -52,7 +51,7 @@ class App extends Component {
 		this.displayLoader()
 		const $this = this
 		const login = this.state.login
-		const ref = firebase.database().ref("users/"+login).once('value').then(function(snapshot) {
+		firebase.database().ref("users/"+login).once('value').then(function(snapshot) {
 		  const response = snapshot.val();
 		  //console.log(response)
 		  $this.requestSucces(login,response)
@@ -101,8 +100,8 @@ class App extends Component {
     return (
       <div className="App">
       	<EslNav />
-        app
-        {this.state.loginError && <div>informations de connexion erronés</div>}
+        <h1>Connexion</h1>
+        {this.state.loginError && <h3 className="error">informations de connexion erronées</h3>}
         {!this.state.connexion &&
         <form className="connexion-form">
         	<label>Login</label>

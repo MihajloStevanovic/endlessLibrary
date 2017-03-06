@@ -41,7 +41,7 @@ class EslFiche extends Component {
     return (
       <div className="Fiche">
         <EslNav />
-        <div><img src="#" alt="" /></div>
+        <div><img src={this.state.img} alt="" /></div>
       	<h2>{this.state.name}</h2>
         <h3>{this.state.category}</h3>
         <p>{this.state.desc}</p>

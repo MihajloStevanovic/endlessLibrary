@@ -1,38 +1,100 @@
 import React, { Component } from 'react';
 import EslNav from '../components/EslNav';
-import EslList from '../components/EslList';
+import ImageLoader from 'react-imageloader';
+import {Link} from 'react-router'
+
+import * as firebase from 'firebase';
 
 class EslSeries extends Component {
-	constructor(props) {
+constructor(props) {
 		super(props)
 		this.state = {
-			series: [
-				{
-					'id':'1',
-					'name':"game of thrones",
-					'type': "serie"
-				},
-				{
-					'id':'2',
-					'name':'vikings',
-					'type': "serie"
-				},
-				{
-					'id':'3',
-					'name':'flash',
-					'type': "serie"
-				}
-			]
+			loginStatus : window.localStorage.getItem('loginStatus'),
+			series : {
+				mostViewed : [],
+				mostLiked : [],
+				all : []
+			}
 		}
+	}
+	componentWillMount() {
+		
+		console.log('loading')
+		/*var element = document.createElement('div');
+		element.className+= 'loader-wrapper';
+		var app = document.querySelector('.esl-app');
+		app.appendChild(element);*/
+		if(this.state.loginStatus !== 'true') {
+		  this.props.router.push({
+		       pathname: '/login'
+		  });
+		}
+		const $this = this
+		firebase.database().ref("series/").once('value').then(function(snapshot) {
+		  const response = snapshot.val();
+		  /*var element = document.querySelector('.loader-wrapper');
+			element.parentNode.removeChild(element);*/
+		  $this.setState({series:response})
+		  $this.setState({series:{mostViewed : response.mostViewed,mostLiked : response.mostLiked,all : response.all}})
+		});
+		console.log(this.state.series)
+	}
+	componentDidMount() {
+
 	}
   render() {
     return (
-      <div className="Series">
-        <EslNav />
-        <h2>Les séries les plus regardés</h2>
-        <EslList data={this.state.series}/>
-        <h2>Les séries les plus aimés</h2>
-        <EslList data={this.state.series}/>
+      <div className="Films">
+      	<EslNav />
+      	<h1 className="header">Rubrique Toutes les séries</h1>
+        <h2>Les séries les plus regardése</h2>
+        <ul className="List">
+	      	{this.state.series.mostViewed.map((item,index) => (
+	          <li key={index}>
+	            <Link to={`/${item.type}/${item.id}`} >
+	              <div>
+	              	<ImageLoader
+								    src={item.img}>
+								  </ImageLoader>
+	                <h2>{item.name}</h2>
+	                <h3>{item.type}</h3>
+	              </div>
+	            </Link>
+	          </li>
+	        ))}
+	      </ul>
+        <h2>Les séries les plus aimées</h2>
+        <ul className="List">
+	      	{this.state.series.mostLiked.map((item,index) => (
+	          <li key={index}>
+	            <Link to={`/${item.type}/${item.id}`} >
+	              <div>
+	                <ImageLoader
+								    src={item.img}>
+								  </ImageLoader>
+	                <h2>{item.name}</h2>
+	                <h3>{item.type}</h3>
+	              </div>
+	            </Link>
+	          </li>
+	        ))}
+	      </ul>
+	      <h2>Toutes les séries</h2>
+        <ul className="List">
+	      	{this.state.series.mostLiked.map((item,index) => (
+	          <li key={index}>
+	            <Link to={`/${item.type}/${item.id}`} >
+	              <div>
+	                <ImageLoader
+								    src={item.img}>
+								  </ImageLoader>
+	                <h2>{item.name}</h2>
+	                <h3>{item.type}</h3>
+	              </div>
+	            </Link>
+	          </li>
+	        ))}
+	      </ul>
       </div>
     );
   }
