@@ -18,10 +18,10 @@ const EslRouter = () => {
       <Route path='/' component={App} loginStatus={loginStatus}/>
       <Route path="/login" component={App} loginStatus={loginStatus}/>
       <Route path="/home" component={EslHome} loginStatus={loginStatus}/>
-      <Route path="/movies" component={EslFilms}/>
-      <Route path="/movies/:filmId" component={EslFiche}/>
-      <Route path="/series" component={EslSeries}/>
-      <Route path="/serie/:serieId" component={EslFiche}/>
+      <Route path="/movies" component={EslFilms} loginStatus={loginStatus}/>
+      <Route path="/movies/:filmId" component={EslFiche} loginStatus={loginStatus}/>
+      <Route path="/series" component={EslSeries} loginStatus={loginStatus}/>
+      <Route path="/serie/:serieId" component={EslFiche} loginStatus={loginStatus}/>
       <Route path="/my-movies" component={MyMovies}/>
       <Route path="/my-series" component={MySeries}/>
       <Route path="/my-profile" component={MyProfile}/>

@@ -7,9 +7,13 @@ class EslList extends Component {
 		this.state = {
 			items: props.data
 		}
-  console.log(this.props)
+    console.log('3',props)
 	}
+  componentDidMount() {
+    console.log('bis', this.props)
+  }
   render() {
+    console.log('4 rendering')
     return (
       <ul className="List">
       	{this.state.items.map((item,index) => (

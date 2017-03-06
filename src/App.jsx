@@ -54,7 +54,7 @@ class App extends Component {
 		const login = this.state.login
 		const ref = firebase.database().ref("users/"+login).once('value').then(function(snapshot) {
 		  const response = snapshot.val();
-		  console.log(response)
+		  //console.log(response)
 		  $this.requestSucces(login,response)
 		});
 	}

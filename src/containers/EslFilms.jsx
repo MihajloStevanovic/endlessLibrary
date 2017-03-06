@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EslNav from '../components/EslNav';
 import EslList from '../components/EslList';
+import {Link} from 'react-router'
 
 import * as firebase from 'firebase';
 
@@ -9,55 +10,34 @@ class EslFilms extends Component {
 		super(props)
 		this.state = {
 			loginStatus : window.localStorage.getItem('loginStatus'),
-			films: [
-				{
-					'id':'1',
-					'name': 'avatar  ezvgezvez',
-					'type': "film"
-				},
-				{
-					'id':'2',
-					'name':'star wars ezfezf',
-					'type': "film"
-				},
-				{
-					'id':'3',
-					'name':'le hobbit ezfezf',
-					'type': "film"
-				}
-			],
-			series: [
-				{
-					'id':'1',
-					'name':"game of thrones ezfezf",
-					'type': "serie"
-				},
-				{
-					'id':'2',
-					'name':'vikings zfezgfz',
-					'type': "serie"
-				},
-				{
-					'id':'3',
-					'name':'flash ezfezf',
-					'type': "serie"
-				}
-			]
+			films : {
+				mostViewed : [],
+				mostLiked : [],
+				all : []
+			}
 		}
 	}
 	componentWillMount() {
+		
+		console.log('loading')
+		var element = document.createElement('div');
+		element.className+= 'loader-wrapper';
+		var app = document.querySelector('.esl-app');
+		app.appendChild(element);
 		if(this.state.loginStatus !== 'true') {
 		  this.props.router.push({
 		       pathname: '/login'
 		  });
 		}
-				const $this = this
+		const $this = this
 		const ref = firebase.database().ref("films/").once('value').then(function(snapshot) {
 		  const response = snapshot.val();
-		  //console.log(response)
+		  var element = document.querySelector('.loader-wrapper');
+			element.parentNode.removeChild(element);
 		  $this.setState({films:response})
-		  console.log($this.state.films)
+		  $this.setState({films:{mostViewed : response.mostViewed,mostLiked : response.mostLiked,all : response.all}})
 		});
+		console.log(this.state.films)
 	}
 	componentDidMount() {
 
@@ -66,12 +46,49 @@ class EslFilms extends Component {
     return (
       <div className="Films">
       	<EslNav />
-      	on est sur les films
+      	<h1>Rubrique Tous les films</h1>
         <h2>Les films les plus regardés</h2>
-        <EslList data={this.state.films}/>
+        <ul className="List">
+	      	{this.state.films.mostViewed.map((item,index) => (
+	          <li key={index}>
+	            <Link to={`/${item.type}/${item.id}`} >
+	              <div>
+	                <img src="#" alt="" />
+	                <h2>{item.name}</h2>
+	                <h3>{item.type}</h3>
+	              </div>
+	            </Link>
+	          </li>
+	        ))}
+	      </ul>
         <h2>Les films les plus aimés</h2>
-        <EslList data={this.state.films}/>
-        <button onClick={this.onClickButton}>button</button>
+        <ul className="List">
+	      	{this.state.films.mostLiked.map((item,index) => (
+	          <li key={index}>
+	            <Link to={`/${item.type}/${item.id}`} >
+	              <div>
+	                <img src="#" alt="" />
+	                <h2>{item.name}</h2>
+	                <h3>{item.type}</h3>
+	              </div>
+	            </Link>
+	          </li>
+	        ))}
+	      </ul>
+	      <h2>Tous les films</h2>
+        <ul className="List">
+	      	{this.state.films.mostLiked.map((item,index) => (
+	          <li key={index}>
+	            <Link to={`/${item.type}/${item.id}`} >
+	              <div>
+	                <img src="#" alt="" />
+	                <h2>{item.name}</h2>
+	                <h3>{item.type}</h3>
+	              </div>
+	            </Link>
+	          </li>
+	        ))}
+	      </ul>
       </div>
     );
   }
