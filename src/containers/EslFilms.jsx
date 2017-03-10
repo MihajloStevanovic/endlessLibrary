@@ -51,7 +51,7 @@ class EslFilms extends Component {
         <ul className="List">
 	      	{this.state.films.mostViewed.map((item,index) => (
 	          <li key={index}>
-	            <Link to={`/${item.type}/${item.id}`} >
+	            <Link to={{ pathname: `/${item.type}s/${item.name}`, params: { showAge: true } }}>
 	              <div>
 	                <ImageLoader
 								    src={item.img}>
@@ -67,7 +67,7 @@ class EslFilms extends Component {
         <ul className="List">
 	      	{this.state.films.mostLiked.map((item,index) => (
 	          <li key={index}>
-	            <Link to={`/${item.type}/${item.id}`} >
+	            <Link to={`/${item.type}s/${item.name}`} >
 	              <div>
 	                <ImageLoader
 								    src={item.img}>
@@ -83,7 +83,7 @@ class EslFilms extends Component {
         <ul className="List">
 	      	{this.state.films.mostLiked.map((item,index) => (
 	          <li key={index}>
-	            <Link to={`/${item.type}/${item.id}`} >
+	            <Link to={`/${item.type}s/${item.name}`} >
 	              <div>
 	                <ImageLoader
 								    src={item.img}>

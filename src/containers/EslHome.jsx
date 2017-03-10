@@ -79,7 +79,6 @@ class EslHome extends Component {
 	              	<ImageLoader
 								    src={item.img}>
 								  </ImageLoader>
-	                {this.state.imageStatus}
 	                <h2>{item.name}</h2>
 	                <h3>{item.type}</h3>
 	              </div>
