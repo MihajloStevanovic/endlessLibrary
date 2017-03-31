@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EslNav from '../components/EslNav';
 import ImageLoader from 'react-imageloader';
+import EsSlider from '../components/EsSlider';
 import {Link} from 'react-router'
 
 import * as firebase from 'firebase';
@@ -48,53 +49,11 @@ constructor(props) {
       	<EslNav />
       	<h1 className="header">Rubrique Toutes les séries</h1>
         <h2>Les séries les plus regardése</h2>
-        <ul className="List">
-	      	{this.state.series.mostViewed.map((item,index) => (
-	          <li key={index}>
-	            <Link to={`/${item.type}/${item.id}`} >
-	              <div>
-	              	<ImageLoader
-								    src={item.img}>
-								  </ImageLoader>
-	                <h2>{item.name}</h2>
-	                <h3>{item.type}</h3>
-	              </div>
-	            </Link>
-	          </li>
-	        ))}
-	      </ul>
+      	{this.state.series.mostViewed.length > 0 && <EsSlider items={this.state.series.mostViewed}/>}
         <h2>Les séries les plus aimées</h2>
-        <ul className="List">
-	      	{this.state.series.mostLiked.map((item,index) => (
-	          <li key={index}>
-	            <Link to={`/${item.type}/${item.id}`} >
-	              <div>
-	                <ImageLoader
-								    src={item.img}>
-								  </ImageLoader>
-	                <h2>{item.name}</h2>
-	                <h3>{item.type}</h3>
-	              </div>
-	            </Link>
-	          </li>
-	        ))}
-	      </ul>
+      	{this.state.series.mostLiked.length > 0 && <EsSlider items={this.state.series.mostLiked}/>}
 	      <h2>Toutes les séries</h2>
-        <ul className="List">
-	      	{this.state.series.mostLiked.map((item,index) => (
-	          <li key={index}>
-	            <Link to={`/${item.type}/${item.id}`} >
-	              <div>
-	                <ImageLoader
-								    src={item.img}>
-								  </ImageLoader>
-	                <h2>{item.name}</h2>
-	                <h3>{item.type}</h3>
-	              </div>
-	            </Link>
-	          </li>
-	        ))}
-	      </ul>
+      	{this.state.series.mostLiked.length > 0 && <EsSlider items={this.state.series.mostLiked}/>}
       </div>
     );
   }

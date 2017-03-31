@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EslNav from '../components/EslNav';
 import ImageLoader from 'react-imageloader';
+import EsSlider from '../components/EsSlider';
 import {Link} from 'react-router'
 
 import * as firebase from 'firebase';
@@ -13,7 +14,8 @@ class EslFilms extends Component {
 			films : {
 				mostViewed : [],
 				mostLiked : [],
-				all : []
+				all : [],
+				test : [1,2,3,4,5]
 			}
 		}
 	}
@@ -37,7 +39,6 @@ class EslFilms extends Component {
 		  $this.setState({films:response})
 		  $this.setState({films:{mostViewed : response.mostViewed,mostLiked : response.mostLiked,all : response.all}})
 		});
-		console.log(this.state.films)
 	}
 	componentDidMount() {
 
@@ -48,53 +49,11 @@ class EslFilms extends Component {
       	<EslNav />
       	<h1 className="header">Rubrique Tous les films</h1>
         <h2>Les films les plus regardés</h2>
-        <ul className="List">
-	      	{this.state.films.mostViewed.map((item,index) => (
-	          <li key={index}>
-	            <Link to={{ pathname: `/${item.type}s/${item.name}`, params: { showAge: true } }}>
-	              <div>
-	                <ImageLoader
-								    src={item.img}>
-								  </ImageLoader>
-	                <h2>{item.name}</h2>
-	                <h3>{item.type}</h3>
-	              </div>
-	            </Link>
-	          </li>
-	        ))}
-	      </ul>
+      	{this.state.films.mostViewed.length > 0 && <EsSlider items={this.state.films.mostViewed}/>}
         <h2>Les films les plus aimés</h2>
-        <ul className="List">
-	      	{this.state.films.mostLiked.map((item,index) => (
-	          <li key={index}>
-	            <Link to={`/${item.type}s/${item.name}`} >
-	              <div>
-	                <ImageLoader
-								    src={item.img}>
-								  </ImageLoader>
-	                <h2>{item.name}</h2>
-	                <h3>{item.type}</h3>
-	              </div>
-	            </Link>
-	          </li>
-	        ))}
-	      </ul>
+        {this.state.films.mostLiked.length > 0 && <EsSlider items={this.state.films.mostLiked}/>}
 	      <h2>Tous les films</h2>
-        <ul className="List">
-	      	{this.state.films.mostLiked.map((item,index) => (
-	          <li key={index}>
-	            <Link to={`/${item.type}s/${item.name}`} >
-	              <div>
-	                <ImageLoader
-								    src={item.img}>
-								  </ImageLoader>
-	                <h2>{item.name}</h2>
-	                <h3>{item.type}</h3>
-	              </div>
-	            </Link>
-	          </li>
-	        ))}
-	      </ul>
+        {this.state.films.mostLiked.length > 0 && <EsSlider items={this.state.films.mostLiked}/>}
       </div>
     );
   }

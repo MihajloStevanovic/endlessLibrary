@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EslNav from '../components/EslNav';
 import ImageLoader from 'react-imageloader';
+import EsSlider from '../components/EsSlider';
 import {Link} from 'react-router'
 
 
@@ -71,37 +72,9 @@ class EslHome extends Component {
         <EslNav />
         <h1 className="header">Welcome</h1>
         <h2>Les dernièrs films ajoutés</h2>
-        <ul className="List">
-	      	{this.state.films.lastAdded.map((item,index) => (
-	          <li key={index}>
-	            <Link to={`/${item.type}/${item.id}`} >
-	              <div>
-	              	<ImageLoader
-								    src={item.img}>
-								  </ImageLoader>
-	                <h2>{item.name}</h2>
-	                <h3>{item.type}</h3>
-	              </div>
-	            </Link>
-	          </li>
-	        ))}
-	      </ul>
+        {this.state.films.lastAdded.length > 0 && <EsSlider items={this.state.films.lastAdded}/>}
         <h2>Les dernières séries ajoutées</h2>
-        <ul className="List">
-	      	{this.state.series.lastAdded.map((item,index) => (
-	          <li key={index}>
-	            <Link to={`/${item.type}/${item.id}`} >
-	              <div>
-	                <ImageLoader
-								    src={item.img}>
-								  </ImageLoader>
-	                <h2>{item.name}</h2>
-	                <h3>{item.type}</h3>
-	              </div>
-	            </Link>
-	          </li>
-	        ))}
-	      </ul>
+        {this.state.series.lastAdded.length > 0 && <EsSlider items={this.state.series.lastAdded}/>}
       </div>
     );
   }
