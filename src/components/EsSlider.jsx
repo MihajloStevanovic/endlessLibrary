@@ -11,12 +11,15 @@ class EsSlider extends Component {
 		}
 	}
 	render() {
+		console.log(this.state.items)
 		const oSettings = {
 			dots: false,
       infinite: false,
       speed: 500,
-      slidesToShow: 8,
-      slidesToScroll: 2
+      arrows: true,
+      swipe: false,
+		  slidesToShow: 8,
+		  slidesToScroll: 1
 		}
 		const items = this.state.items.items
 		return (
@@ -24,7 +27,7 @@ class EsSlider extends Component {
 				{items.map((item,index) => {
 					return (
 	          <li key={index}>
-	            <Link to={{ pathname: `/${item.type}s/${item.name}`, params: { showAge: true } }}>
+	            <Link to={{ pathname: `/${item.type}s/${item.name}`, params: item }}>
 	              <div>
 	                <ImageLoader
 								    src={item.img}>

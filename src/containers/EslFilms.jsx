@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import EslNav from '../components/EslNav';
-import ImageLoader from 'react-imageloader';
 import EsSlider from '../components/EsSlider';
-import {Link} from 'react-router'
+import {} from 'react-router'
 
 import * as firebase from 'firebase';
 
@@ -20,17 +19,11 @@ class EslFilms extends Component {
 		}
 	}
 	componentWillMount() {
-
-		console.log('loading')
 		/*var element = document.createElement('div');
 		element.className+= 'loader-wrapper';
 		var app = document.querySelector('.esl-app');
 		app.appendChild(element);*/
-		if(this.state.loginStatus !== 'true') {
-		  this.props.router.push({
-		       pathname: '/login'
-		  });
-		}
+
 		const $this = this
 		firebase.database().ref("films/").once('value').then(function(snapshot) {
 		  const response = snapshot.val();

@@ -24,16 +24,15 @@ class MyNav extends Component {
           liste des résultats
         </div>
         <div className="nav">
-          Médiathèque
+          <div>{this.props.userName}</div> 
           <form className="search-form">
             <input type="text" onFocus={this.searchFocus} onBlur={this.searchClose} placeholder="Rechercher un film" />
           </form>
           <ul>
-          	<li><Link to="/home">home</Link></li>
+          	<li><Link to="/">Home</Link></li>
           	<li><Link to="/films">Films</Link></li>
           	<li><Link to="/series">Séries</Link></li>
           </ul>
-          Mon profil
           <ul>
             <li><Link to="/my-movies">Mes films</Link></li>
             <li><Link to="/my-series">Mes séries</Link></li>

@@ -1,97 +1,105 @@
 import React, { Component } from 'react';
 import EslNav from './components/EslNav';
+import EslHome from './containers/EslHome';
 
 import * as firebase from 'firebase';
 
+var config = {
+  apiKey: "AIzaSyCyps_XX9ngz5LuS8lR4m2ZmfQf2czhRWk",
+  authDomain: "endless-movies-library.firebaseapp.com",
+  databaseURL: "https://endless-movies-library.firebaseio.com",
+  storageBucket: "endless-movies-library.appspot.com",
+  messagingSenderId: "805416648017"
+};
+firebase.initializeApp(config);
+
 class App extends Component {
 	/*
-   *
+   * Constructor : initial state
+	 * 
 	 */
 	constructor(props) {
 		super(props)
 		this.state = {
-			loginStatus : window.localStorage.getItem('loginStatus'),
-			login : undefined,
-			password : undefined,
-			loginError: false,
-			userData: null
+			session : false,
+			fbUserData : undefined,
+			appUserData : undefined
 		}
-		this.getConnexion = this.handleSubmit.bind(this)
-		this.handleLoginChange = this.handleLoginChange.bind(this)
-		this.handlePasswordChange = this.handlePasswordChange.bind(this)
 		
 	}
 	/*
-   *
+   * Component will mount
+	 * 
 	 */
 	componentWillMount() {
-		if(this.state.loginStatus === 'true') {
-		  this.props.router.push({
-		       pathname: '/home'
-		  });
-		}
+		this.getSignInStatus()
 	}
 	/*
-   *
+   * Get if user is connected
+	 * 
 	 */
-	handleLoginChange(e){
-		this.setState({login : e.target.value })
-	}
-	/*
-   *
-	 */
-	handlePasswordChange(e){
-		this.setState({password : e.target.value })
-	}
-	/*
-   *
-	 */
-	handleSubmit(e) {
-		e.preventDefault()
-		this.displayLoader()
+	getSignInStatus() {
 		const $this = this
-		const login = this.state.login
-		firebase.database().ref("users/"+login).once('value').then(function(snapshot) {
-		  const response = snapshot.val();
-		  //console.log(response)
-		  $this.requestSucces(login,response)
+		firebase.auth().onAuthStateChanged(function(user) {
+		  if (user) {
+		    $this.getUser(user.uid)
+				$this.setState({session : true, fbUserData: user})
+		  } else {
+				$this.setState({session : false})
+		  }
 		});
 	}
-	displayLoader() {
-		console.log('loading')
-		var element = document.createElement('div');
-		element.className+= 'loader-wrapper';
-		var app = document.querySelector('.esl-app');
-		app.appendChild(element);
+	/*
+   * Handle the Facebook login Popin
+	 *
+	 */
+	handleSignIn() {
+		const $this = this
+		const provider = new firebase.auth.FacebookAuthProvider();
+		firebase.auth().signInWithPopup(provider).then(function(result) {
+		  $this.onSignInSuccess(result)
+		}).catch(function(error) {
+		  console.log('Facebook login has failed')
+		});
 	}
 	/*
    *
 	 */
-	requestSucces(login,response) {
-		if(this.state.password === response.password) {
-	  	//@todo:get data
-	  	this.setState({userData : response.data})
-	  	window.localStorage.setItem('loginStatus', true);
-	  	this.setState({connected : true})
-	  	this.loadData()
-			//@todo:init app
-	  } else {
-	  	this.setState({loginError : true})
-	  	//@todo: manage error
-	  }
-
-		var element = document.querySelector('.loader-wrapper');
-		element.parentNode.removeChild(element);
+	onSignInSuccess(result) {
+		this.setState({fbUserData : result, session : 'true'})
+		this.getUser(this.state.fbUserData.user.uid)
 	}
 	/*
    *
 	 */
-	loadData(data) {
-		this.setState({loginError : false})
-		this.props.router.push({
-		     pathname: '/home',
-		     state: {connected: this.state.connected}
+	getUser(fbUid) {
+		const $this = this
+		firebase.database().ref('users/').once('value').then(function(snapshot) {
+			const response = snapshot.val()
+			const user = response[fbUid]
+			if(user) {
+				$this.onUserExist(user)
+			} else {
+				$this.onUserNotExist(fbUid)
+			}
+		}).catch(function(error) {
+			console.log(error)
 		});
+	}
+	/*
+   *
+	 */
+	onUserExist(data) {
+		this.setState({appUserData : data})
+	}
+	/*
+   *
+	 */
+	onUserNotExist(fbUid) {
+		//var newPostKey = firebase.database().ref().child('users').push().key;
+		var updates = {};
+	  updates['/users/' + fbUid] = {email: this.state.fbUserData.user.email};
+		return firebase.database().ref().update(updates);
 	}
 	/*
    *
@@ -100,16 +108,12 @@ class App extends Component {
     return (
       <div className="App">
       	<EslNav />
+      	<h1 className="header">Moover</h1>
         <h1>Connexion</h1>
-        {this.state.loginError && <h3 className="error">informations de connexion erronées</h3>}
-        {!this.state.connexion &&
-        <form className="connexion-form">
-        	<label>Login</label>
-	      	<input type="text" onChange={this.handleLoginChange}/>
-	      	<label>Mot de passe</label>
-					<input type="password" onChange={this.handlePasswordChange}/>
-					<button onClick={this.handleSubmit.bind(this)}>connexion</button>
-	      </form> }
+        {(this.state.session === false) &&
+					<button onClick={this.handleSignIn.bind(this)}>Sign in with Facebook</button> }
+				{(this.state.appUserData !== undefined) &&
+					<EslHome appUserData={this.state.appUserData} /> }
       </div>
     );
   }

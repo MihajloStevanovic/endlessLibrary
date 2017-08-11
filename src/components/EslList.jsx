@@ -18,7 +18,7 @@ class EslList extends Component {
       <ul className="List">
       	{this.state.items.map((item,index) => (
           <li key={index}>
-            <Link to={`/${item.type}/${item.id}`} >
+            <Link to={`/${item.type}/${item.id}`} item={item}>
               <div>
                 <img src="#" alt="" />
                 <h2>{item.name}</h2>

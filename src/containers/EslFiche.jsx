@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import EslNav from '../components/EslNav';
-import ImageLoader from 'react-imageloader';
-import {Link} from 'react-router'
+import {} from 'react-router'
 
 import * as firebase from 'firebase';
 
@@ -21,17 +20,6 @@ class EslFiche extends Component {
     console.log('props : ', props)
 	}
   componentWillMount() {
-
-    console.log('loading')
-    /*var element = document.createElement('div');
-    element.className+= 'loader-wrapper';
-    var app = document.querySelector('.esl-app');
-    app.appendChild(element);*/
-    if(this.state.loginStatus !== 'true') {
-      this.props.router.push({
-           pathname: '/login'
-      });
-    }
     const $this = this
     firebase.database().ref("films/").once('value').then(function(snapshot) {
       const response = snapshot.val();
@@ -40,7 +28,7 @@ class EslFiche extends Component {
       $this.setState({films:response})
       $this.setState({films:{mostViewed : response.mostViewed,mostLiked : response.mostLiked,all : response.all}})
     });
-    console.log(this.state.films)
+    //console.log(this.state.films)
   }
   /*
    * Increment media likes number
@@ -69,6 +57,7 @@ class EslFiche extends Component {
     return (
       <div className="Fiche">
         <EslNav />
+        <h1 className="header">{this.state.name}</h1>
         <div><img src={this.state.img} alt="" /></div>
       	<h2>{this.state.name}</h2>
         <h3>{this.state.category}</h3>
