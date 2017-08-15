@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import EslRouter from './EslRouter';
-import './index.css';
+
+require('./stylesheets/main.scss')
 
 ReactDOM.render(
   <EslRouter />,
