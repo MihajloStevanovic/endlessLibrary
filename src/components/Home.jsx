@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import EslNav from '../components/EslNav';
 import EsSlider from '../components/EsSlider';
 import {} from 'react-router'
 
@@ -52,9 +51,8 @@ class EslHome extends Component {
   render() {
     return (
       <div className="Home">
-        <EslNav params={this.state} />
-        <h1 className="header">Welcome</h1>
         <div className="overview">
+					overview...
         </div>
         <h2>Les dernièrs films ajoutés</h2>
         {this.state.films.lastAdded.length > 0 && <EsSlider items={this.state.films.lastAdded}/>}

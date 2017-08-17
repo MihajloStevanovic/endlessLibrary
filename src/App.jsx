@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import EslNav from './components/EslNav';
-import EslHome from './containers/EslHome';
+import Header from './components/Header';
+import Nav from './components/Nav';
+import Home from './components/Home';
 
 import * as firebase from 'firebase';
 
@@ -107,13 +108,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      	<EslNav />
-      	<h1 className="header">Moover</h1>
-        <h1>Connexion</h1>
+      	<Nav />
+      	<Header />
         {(this.state.session === false) &&
-					<button onClick={this.handleSignIn.bind(this)}>Sign in with Facebook</button> }
+				<div>
+					<h1>Connexion</h1>
+					<button onClick={this.handleSignIn.bind(this)}>Sign in with Facebook</button>
+				</div> }
 				{(this.state.appUserData !== undefined) &&
-					<EslHome appUserData={this.state.appUserData} /> }
+					<Home appUserData={this.state.appUserData} /> }
       </div>
     );
   }

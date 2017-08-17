@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import EslNav from '../components/EslNav';
+import Nav from '../components/Nav';
 import EslList from '../components/EslList';
 
 class MySeries extends Component {
@@ -28,7 +28,7 @@ class MySeries extends Component {
   render() {
     return (
       <div className="Series">
-        <EslNav />
+        <Nav />
         <h2>Mes dernières séries</h2>
         <EslList data={this.state.series}/>
       </div>

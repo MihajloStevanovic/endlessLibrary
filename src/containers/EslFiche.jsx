@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import EslNav from '../components/EslNav';
+import Nav from '../components/Nav';
 import {} from 'react-router'
 
 import * as firebase from 'firebase';
@@ -56,7 +56,7 @@ class EslFiche extends Component {
   render() {
     return (
       <div className="Fiche">
-        <EslNav />
+        <Nav />
         <h1 className="header">{this.state.name}</h1>
         <div><img src={this.state.img} alt="" /></div>
       	<h2>{this.state.name}</h2>

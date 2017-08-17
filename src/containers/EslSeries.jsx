@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import EslNav from '../components/EslNav';
+import Header from '../components/Header';
+import Nav from '../components/Nav';
 import EsSlider from '../components/EsSlider';
 import {} from 'react-router'
 
@@ -39,8 +40,8 @@ constructor(props) {
   render() {
     return (
       <div className="Films">
-      	<EslNav />
-      	<h1 className="header">Rubrique Toutes les séries</h1>
+      	<Nav />
+      	<Header />
         <h2>Les séries les plus regardése</h2>
       	{this.state.series.mostViewed.length > 0 && <EsSlider items={this.state.series.mostViewed}/>}
         <h2>Les séries les plus aimées</h2>

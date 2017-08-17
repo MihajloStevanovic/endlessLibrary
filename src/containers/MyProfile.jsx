@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import EslNav from '../components/EslNav';
+import Nav from '../components/Nav';
 
 class MyProfile extends Component {
 	constructor(props) {
@@ -9,7 +9,7 @@ class MyProfile extends Component {
   render() {
     return (
       <div className="Series">
-        <EslNav />
+        <Nav />
         My profile
       </div>
     );

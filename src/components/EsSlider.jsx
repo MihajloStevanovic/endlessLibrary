@@ -18,7 +18,7 @@ class EsSlider extends Component {
       speed: 500,
       arrows: true,
       swipe: false,
-		  slidesToShow: 8,
+		  slidesToShow: 7,
 		  slidesToScroll: 1
 		}
 		const items = this.state.items.items
