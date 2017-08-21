@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
 import Nav from '../components/Nav';
-import EsSlider from '../components/EsSlider';
+import Items from '../components/Items';
 import {} from 'react-router'
 
 import * as firebase from 'firebase';
@@ -42,12 +42,12 @@ constructor(props) {
       <div className="Films">
       	<Nav />
       	<Header />
-        <h2>Les séries les plus regardése</h2>
-      	{this.state.series.mostViewed.length > 0 && <EsSlider items={this.state.series.mostViewed}/>}
-        <h2>Les séries les plus aimées</h2>
-      	{this.state.series.mostLiked.length > 0 && <EsSlider items={this.state.series.mostLiked}/>}
-	      <h2>Toutes les séries</h2>
-      	{this.state.series.mostLiked.length > 0 && <EsSlider items={this.state.series.mostLiked}/>}
+        <h2 className="items-title">Les séries les plus regardése</h2>
+      	{this.state.series.mostViewed.length > 0 && <Items items={this.state.series.mostViewed}/>}
+        <h2 className="items-title">Les séries les plus aimées</h2>
+      	{this.state.series.mostLiked.length > 0 && <Items items={this.state.series.mostLiked}/>}
+	      <h2 className="items-title">Toutes les séries</h2>
+      	{this.state.series.mostLiked.length > 0 && <Items items={this.state.series.mostLiked}/>}
       </div>
     );
   }

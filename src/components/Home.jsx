@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import EsSlider from '../components/EsSlider';
+import Items from '../components/Items';
+import Overview from '../components/Overview';
 import {} from 'react-router'
 
 
@@ -51,13 +52,11 @@ class EslHome extends Component {
   render() {
     return (
       <div className="Home">
-        <div className="overview">
-					overview...
-        </div>
-        <h2>Les dernièrs films ajoutés</h2>
-        {this.state.films.lastAdded.length > 0 && <EsSlider items={this.state.films.lastAdded}/>}
-        <h2>Les dernières séries ajoutées</h2>
-        {this.state.series.lastAdded.length > 0 && <EsSlider items={this.state.series.lastAdded}/>}
+        <Overview />
+        <h2 className="items-title">Les dernièrs films ajoutés</h2>
+        {this.state.films.lastAdded.length > 0 && <Items items={this.state.films.lastAdded}/>}
+        <h2 className="items-title">Les dernières séries ajoutées</h2>
+        {this.state.series.lastAdded.length > 0 && <Items items={this.state.series.lastAdded}/>}
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Nav from '../components/Nav';
-import EslList from '../components/EslList';
+import Items from '../components/Items';
 
 class MySeries extends Component {
 	constructor(props) {
@@ -30,7 +30,7 @@ class MySeries extends Component {
       <div className="Series">
         <Nav />
         <h2>Mes dernières séries</h2>
-        <EslList data={this.state.series}/>
+        <Items data={this.state.series}/>
       </div>
     );
   }

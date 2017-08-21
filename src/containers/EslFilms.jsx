@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
 import Nav from '../components/Nav';
-import EsSlider from '../components/EsSlider';
+import Items from '../components/Items';
 import {} from 'react-router'
 
 import * as firebase from 'firebase';
@@ -42,12 +42,12 @@ class EslFilms extends Component {
       <div className="Films">
       	<Nav />
       	<Header />
-        <h2>Les films les plus regardés</h2>
-      	{this.state.films.mostViewed.length > 0 && <EsSlider items={this.state.films.mostViewed}/>}
-        <h2>Les films les plus aimés</h2>
-        {this.state.films.mostLiked.length > 0 && <EsSlider items={this.state.films.mostLiked}/>}
-	      <h2>Tous les films</h2>
-        {this.state.films.mostLiked.length > 0 && <EsSlider items={this.state.films.mostLiked}/>}
+        <h2 className="items-title">Les films les plus regardés</h2>
+      	{this.state.films.mostViewed.length > 0 && <Items items={this.state.films.mostViewed}/>}
+        <h2 className="items-title">Les films les plus aimés</h2>
+        {this.state.films.mostLiked.length > 0 && <Items items={this.state.films.mostLiked}/>}
+	      <h2 className="items-title">Tous les films</h2>
+        {this.state.films.mostLiked.length > 0 && <Items items={this.state.films.mostLiked}/>}
       </div>
     );
   }

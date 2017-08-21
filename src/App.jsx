@@ -115,7 +115,7 @@ class App extends Component {
 					<h1>Connexion</h1>
 					<button onClick={this.handleSignIn.bind(this)}>Sign in with Facebook</button>
 				</div> }
-				{(this.state.appUserData !== undefined) &&
+				{(this.state.appUserData !== undefined && this.state.session === true) &&
 					<Home appUserData={this.state.appUserData} /> }
       </div>
     );

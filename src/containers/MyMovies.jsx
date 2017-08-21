@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Nav from '../components/Nav';
-import EslList from '../components/EslList';
+import Items from '../components/Items';
 
 class MyMovies extends Component {
 	constructor(props) {
@@ -45,7 +45,7 @@ class MyMovies extends Component {
       <div className="Films">
       	<Nav />
         <h2>Mes derniers films</h2>
-        <EslList data={this.state.films}/>
+        <Items data={this.state.films}/>
       </div>
     );
   }
