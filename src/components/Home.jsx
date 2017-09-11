@@ -16,10 +16,10 @@ class EslHome extends Component {
 			series: {
 				lastAdded : []
 			},
-			appUserData : this.props.appUserData
+			appUserData : this.props.appUserData,
+			fbUserData : this.props.fbUserData
 		}
 		this.handleImageLoaded = this.handleImageLoaded.bind(this)
-		console.log(this.props)
 	}
 
   /*
@@ -41,7 +41,6 @@ class EslHome extends Component {
 		
 	}
   handleImageLoaded(target,prop,value) {
-  	console.log(target.target,prop,value)
     this.setState({ imageStatus: 'loaded' });
     const imgs = document.querySelectorAll('img');
     //console.log(imgs)
@@ -52,7 +51,7 @@ class EslHome extends Component {
   render() {
     return (
       <div className="Home">
-        <Overview />
+        <Overview appUserData={this.state.appUserData} fbUserData={this.state.fbUserData}/>
         <h2 className="items-title">Les dernièrs films ajoutés</h2>
         {this.state.films.lastAdded.length > 0 && <Items items={this.state.films.lastAdded}/>}
         <h2 className="items-title">Les dernières séries ajoutées</h2>

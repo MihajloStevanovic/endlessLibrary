@@ -15,7 +15,7 @@
       width: 100%;
       border: 3px solid #fff;
       box-shadow: 0 0 2px 0px #a7a7a7;
-      opacity: 0.8;  
+      opacity: 1; 
     }
     .imageloader {
       display: block;
@@ -28,7 +28,7 @@
     }
     &:hover {
       img {
-        opacity: 1; 
+        opacity: 0.8;  
       }
     }
   }
@@ -59,13 +59,14 @@
     }
   }
   .slick-arrow {
-    top: 45%;
+    top: -30px;
   }
   .slick-prev {
-    left: -30px;
+    left: auto;
+    right: 45px;
   }
   .slick-next {
-    right: -18px;
+    right: 0;
   }
 }
 /*.List {

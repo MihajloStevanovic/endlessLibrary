@@ -54,7 +54,7 @@ class Items extends Component {
 					{items.map((item,index) => {
 						return (
 							<li key={index}>
-								<Link to={{ pathname: `/${item.type}s/${item.name}`, params: item }}>
+								<Link to={{ pathname: `/${item.type}s/${item.id}`}}>
 									<div className="item">
 										<ImageLoader
 											src={item.img}>

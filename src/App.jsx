@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Home from './components/Home';
+import Login from './components/Login';
 
 import * as firebase from 'firebase';
 
@@ -43,24 +44,12 @@ class App extends Component {
 		const $this = this
 		firebase.auth().onAuthStateChanged(function(user) {
 		  if (user) {
+		  	console.log(user);
 		    $this.getUser(user.uid)
 				$this.setState({session : true, fbUserData: user})
 		  } else {
 				$this.setState({session : false})
 		  }
-		});
-	}
-	/*
-   * Handle the Facebook login Popin
-	 *
-	 */
-	handleSignIn() {
-		const $this = this
-		const provider = new firebase.auth.FacebookAuthProvider();
-		firebase.auth().signInWithPopup(provider).then(function(result) {
-		  $this.onSignInSuccess(result)
-		}).catch(function(error) {
-		  console.log('Facebook login has failed')
 		});
 	}
 	/*
@@ -111,12 +100,9 @@ class App extends Component {
       	<Nav />
       	<Header />
         {(this.state.session === false) &&
-				<div>
-					<h1>Connexion</h1>
-					<button onClick={this.handleSignIn.bind(this)}>Sign in with Facebook</button>
-				</div> }
+        <Login /> }
 				{(this.state.appUserData !== undefined && this.state.session === true) &&
-					<Home appUserData={this.state.appUserData} /> }
+					<Home appUserData={this.state.appUserData} fbUserData={this.state.fbUserData} /> }
       </div>
     );
   }

@@ -17,9 +17,6 @@ class Header extends Component {
       alert(error);
     });
   }
-  onLogOutSuccess() {
-
-  }
   render() {
     return (
       <div className="header">

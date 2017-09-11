@@ -1,0 +1,28 @@
+/* Login component */
+.login {
+	display: table;
+	width: 100%;
+	text-align: center;
+	height: 100%;
+	.login-box {
+		display: table-cell;
+		line-height: 1;
+		vertical-align: middle;
+		.login-title {
+			color: #666;
+			line-height: 4;
+		}
+		.facebook-login-button {
+			font-size: 0.8rem;
+			color: #FFF;
+			padding: 10px;
+			border-radius: 5px;
+			background: #4267b2;
+			cursor: pointer;
+			&:hover {
+				background: #507bd2;
+			}
+		}
+	}
+	
+}
