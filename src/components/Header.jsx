@@ -20,7 +20,7 @@ class Header extends Component {
   render() {
     return (
       <div className="header">
-        <h1>Moover</h1>
+        <h1>mO_Over</h1>
         <div className="header-navigation">
           <Link className="button-log-out" onClick={this.onLogOut.bind(this)} to="/">Log out</Link>
         </div>

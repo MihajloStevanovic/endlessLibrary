@@ -7,10 +7,10 @@
     height: 50px;
     line-height: 50px;
     box-sizing: border-box;
-    background-color: #288b54;
+    background-color: #4b4b6f;
     color: #fff;
     z-index: +2;
-    border-bottom: 1px solid #1d6d40; 
+    border-bottom: 1px solid #31314a; 
     h1 {
         display: inline-block;
         font-size: 1.2rem;
@@ -29,9 +29,9 @@
         padding: 0 20px;
         line-height: 49px;
         cursor: pointer;
-        background-color: #31a263;
+        background-color: #535379;
         &:hover {
-            background-color: #2a8251;
+            background-color: #5e5e88;
         }
     }
 } 
