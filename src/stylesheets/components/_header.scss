@@ -7,15 +7,15 @@
     height: 50px;
     line-height: 50px;
     box-sizing: border-box;
-    background-color: #4b4b6f;
-    color: #fff;
+    background-color: $primary-color;
+    color: $primary-white;
     z-index: +2;
-    border-bottom: 1px solid #31314a; 
+    border-bottom: 1px solid $primary-dark; 
     h1 {
         display: inline-block;
         font-size: 1.2rem;
         padding-left: 30px;
-        text-shadow: 0px 1px 1px #184a2e;
+        text-shadow: 0px 2px 2px $primary-dark;
     }
     .header-navigation {
         float: right;
@@ -25,13 +25,13 @@
     .button-log-out {
         display: block;
         background: none;
-        color: #FFF;
+        color: $primary-white;
         padding: 0 20px;
         line-height: 49px;
         cursor: pointer;
-        background-color: #535379;
+        background-color: $secondary-color;
         &:hover {
-            background-color: #5e5e88;
+            background-color: $secondary-light;
         }
     }
 } 

@@ -16,7 +16,7 @@ const EslRouter = () => {
       <Route path="/films" component={EslFilms} />
       <Route path="/films/:filmId" component={Item} />
       <Route path="/series" component={EslSeries} />
-      <Route path="/serie/:serieName" component={Item} />
+      <Route path="/films/:serieId" component={Item} />
       <Route path="/my-movies" component={MyMovies}/>
       <Route path="/my-series" component={MySeries}/>
       <Route path="/my-profile" component={MyProfile}/>

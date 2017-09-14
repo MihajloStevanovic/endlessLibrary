@@ -14,8 +14,7 @@ class EslFilms extends Component {
 			films : {
 				mostViewed : [],
 				mostLiked : [],
-				all : [],
-				test : [1,2,3,4,5]
+				all : []
 			}
 		}
 	}

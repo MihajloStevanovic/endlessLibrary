@@ -20,6 +20,7 @@ class Login extends Component {
 		  $this.onSignInSuccess(result)
 		}).catch(function(error) {
 		  console.log('Facebook login has failed')
+		  console.log(error)
 		});
 	}
   render() {

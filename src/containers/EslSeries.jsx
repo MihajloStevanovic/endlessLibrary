@@ -32,7 +32,6 @@ constructor(props) {
 		  $this.setState({series:response})
 		  $this.setState({series:{mostViewed : response.mostViewed,mostLiked : response.mostLiked,all : response.all}})
 		});
-		console.log(this.state.series)
 	}
 	componentDidMount() {
 

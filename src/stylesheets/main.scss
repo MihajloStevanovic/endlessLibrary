@@ -1,10 +1,11 @@
 @import 'utils/fonts';
 @import 'utils/reset';
+@import 'utils/vars';
 
 body {
   font-family: sans-serif;
   font-size: 16px;
-  background-color: #F1F1F1;
+  background-color: $primary-background;
 }
 
 .esl-app {

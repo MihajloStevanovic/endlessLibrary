@@ -14,6 +14,7 @@ class Item extends Component {
     }
     this.handleLike = this.handleLike.bind(this)
     this.handleView = this.handleView.bind(this)
+    console.log(props)
 	}
   componentWillMount() {
     const $this = this
